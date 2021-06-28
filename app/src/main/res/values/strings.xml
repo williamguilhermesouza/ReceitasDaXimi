@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ReceitasDaXimi</string>
+    <string name="pesquise_o_titulo_da_receita">Pesquisar receita</string>
+    <string name="add">add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo_da_receita">Título da Receita</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="modo_de_preparo">Modo de preparo</string>
+    <string name="salvar">Salvar</string>
+</resources>
