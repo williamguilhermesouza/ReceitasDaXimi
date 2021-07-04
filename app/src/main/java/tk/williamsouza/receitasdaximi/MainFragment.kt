@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import tk.williamsouza.receitasdaximi.adapters.RecipeRecyclerViewAdapter
@@ -36,7 +36,17 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_newRecipeFragment)
         }
 
-        val recipeSearch = view.findViewById<EditText>(R.id.recipeSearch)
+        val recipeSearch = view.findViewById<AutoCompleteTextView>(R.id.recipeSearch)
+
+        recipeSearch.setOnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                view.findNavController().navigate(R.id.action_mainFragment_to_recipesListFragment)
+                handled = true
+            }
+
+            handled
+        }
 
 
         return view
@@ -44,18 +54,22 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
         addDataSet()
+
+        val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.recipeSearch)
+        val recipeTitles = arrayListOf<String>()
+
+        for (recipe in data) {
+             recipeTitles.add(recipe.title)
+        }
+
+        val arrayAdapter = ArrayAdapter<String>(this.requireContext(), android.R.layout.select_dialog_item, recipeTitles)
+
+        autoTextView.threshold = 1
+
+        autoTextView.setAdapter(arrayAdapter)
     }
 
-    private fun initRecyclerView() {
-        val recipeView = this.requireView().findViewById<RecyclerView>(R.id.recipeRecyclerView)
-        recipeAdapter = RecipeRecyclerViewAdapter()
-
-        recipeView.layoutManager = LinearLayoutManager(this.context)
-
-        recipeView.adapter = recipeAdapter
-    }
 
     private fun setData(_data: List<Recipe>) {
         data = _data
@@ -67,16 +81,14 @@ class MainFragment : Fragment() {
             AppDatabase::class.java, "recipe"
         ).build()
 
-        CoroutineScope(IO).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val data = db.recipeDao().getAll()
-            withContext(Main) {
+            withContext(Dispatchers.Main) {
                 setData(data)
-                recipeAdapter.submitList(data)
-
-                recipeAdapter.notifyDataSetChanged()
             }
         }
     }
+
 
 
 }

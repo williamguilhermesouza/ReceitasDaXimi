@@ -14,8 +14,8 @@
             android:id="@+id/action_mainFragment_to_newRecipeFragment"
             app:destination="@id/newRecipeFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_editRecipeFragment"
-            app:destination="@id/editRecipeFragment" />
+            android:id="@+id/action_mainFragment_to_recipesListFragment"
+            app:destination="@id/recipesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/newRecipeFragment"
@@ -36,5 +36,14 @@
         <action
             android:id="@+id/action_editRecipeFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipesListFragment"
+        android:name="tk.williamsouza.receitasdaximi.RecipesListFragment"
+        android:label="fragment_recipes_list"
+        tools:layout="@layout/fragment_recipes_list" >
+        <action
+            android:id="@+id/action_recipesListFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment" />
     </fragment>
 </navigation>

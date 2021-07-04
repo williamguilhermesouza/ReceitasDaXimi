@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/recipeSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -15,6 +15,7 @@
         android:drawableStart="?android:attr/actionModeWebSearchDrawable"
         android:ems="10"
         android:hint="@string/pesquise_o_titulo_da_receita"
+        android:imeOptions="actionSearch"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,14 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipeRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipeSearch" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addRecipeButton"
@@ -45,13 +39,15 @@
         android:focusable="true" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/sprout"
+        android:id="@+id/logoImage"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/logo"
         app:layout_constraintBottom_toTopOf="@+id/recipeSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/receitas_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
