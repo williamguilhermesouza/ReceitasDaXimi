@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:enabled="false"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,11 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:enabled="false"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine|textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientsTextView"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsTextView" />
 
     <TextView
         android:id="@+id/preparationTextView"
@@ -72,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:enabled="false"
         android:importantForAutofill="no"
         android:inputType="textMultiLine|textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Editar"
+        android:text="@string/editar"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Apagar"
+        android:text="@string/apagar"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/saveButton"

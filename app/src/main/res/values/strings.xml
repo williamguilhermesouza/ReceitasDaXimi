@@ -9,4 +9,6 @@
     <string name="modo_de_preparo">Modo de preparo</string>
     <string name="salvar">Salvar</string>
     <string name="logo">logo</string>
+    <string name="editar">Editar</string>
+    <string name="apagar">Apagar</string>
 </resources>

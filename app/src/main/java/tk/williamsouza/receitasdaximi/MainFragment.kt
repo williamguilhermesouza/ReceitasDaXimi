@@ -16,12 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import tk.williamsouza.receitasdaximi.adapters.RecipeRecyclerViewAdapter
 import tk.williamsouza.receitasdaximi.models.Recipe
 import tk.williamsouza.receitasdaximi.room.AppDatabase
 
 class MainFragment : Fragment() {
-    private lateinit var recipeAdapter: RecipeRecyclerViewAdapter
+    private lateinit var arrayAdapter: ArrayAdapter<String>
     private var data: List<Recipe> = ArrayList()
 
     override fun onCreateView(
@@ -48,26 +47,12 @@ class MainFragment : Fragment() {
             handled
         }
 
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addDataSet()
-
-        val autoTextView = view.findViewById<AutoCompleteTextView>(R.id.recipeSearch)
-        val recipeTitles = arrayListOf<String>()
-
-        for (recipe in data) {
-             recipeTitles.add(recipe.title)
-        }
-
-        val arrayAdapter = ArrayAdapter<String>(this.requireContext(), android.R.layout.select_dialog_item, recipeTitles)
-
-        autoTextView.threshold = 1
-
-        autoTextView.setAdapter(arrayAdapter)
     }
 
 
@@ -85,6 +70,19 @@ class MainFragment : Fragment() {
             val data = db.recipeDao().getAll()
             withContext(Dispatchers.Main) {
                 setData(data)
+                val autoTextView = view?.findViewById<AutoCompleteTextView>(R.id.recipeSearch)
+                val recipeTitles = arrayListOf<String>()
+
+                for (recipe in data) {
+                    recipeTitles.add(recipe.title as String)
+                }
+
+                arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.select_dialog_item, recipeTitles)
+
+                autoTextView!!.threshold = 1
+
+                autoTextView.setAdapter(arrayAdapter)
+                arrayAdapter.notifyDataSetChanged()
             }
         }
     }

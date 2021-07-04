@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import tk.williamsouza.receitasdaximi.R
 import tk.williamsouza.receitasdaximi.models.Recipe
@@ -40,6 +42,11 @@ class RecipeRecyclerViewAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>()
 
         fun bind(recipe: Recipe) {
             recipeTitleButton.text = recipe.title
+
+            recipeTitleButton.setOnClickListener {
+                val bundle = bundleOf("recipe" to recipe)
+                itemView.findNavController().navigate(R.id.action_recipesListFragment_to_editRecipeFragment, bundle)
+            }
         }
     }
 }
