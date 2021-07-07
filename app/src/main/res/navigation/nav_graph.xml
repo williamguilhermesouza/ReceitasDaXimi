@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_recipesListFragment_to_editRecipeFragment"
             app:destination="@id/editRecipeFragment" />
+        <argument
+            android:name="search"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

@@ -54,8 +54,14 @@ class RecipesListFragment : Fragment() {
         ).build()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val data = db.recipeDao().getAll()
+            var data = db.recipeDao().getAll()
             withContext(Dispatchers.Main) {
+                val search = arguments?.get("search") as String
+                if (search != "") {
+                    data = data.filter {
+                        it.title!!.contains(search)
+                    }
+                }
                 setData(data)
                 recipeAdapter.submitList(data)
 

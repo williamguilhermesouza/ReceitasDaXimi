@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -40,7 +41,8 @@ class MainFragment : Fragment() {
         recipeSearch.setOnEditorActionListener { v, actionId, event ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                view.findNavController().navigate(R.id.action_mainFragment_to_recipesListFragment)
+                val bundle = bundleOf("search" to recipeSearch.text.toString())
+                view.findNavController().navigate(R.id.action_mainFragment_to_recipesListFragment, bundle)
                 handled = true
             }
 
