@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -32,6 +33,8 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         val recipeButton = view.findViewById<FloatingActionButton>(R.id.addRecipeButton)
 
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
         recipeButton?.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_newRecipeFragment)
         }
@@ -42,6 +45,8 @@ class MainFragment : Fragment() {
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val bundle = bundleOf("search" to recipeSearch.text.toString())
+                requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
                 view.findNavController().navigate(R.id.action_mainFragment_to_recipesListFragment, bundle)
                 handled = true
             }
